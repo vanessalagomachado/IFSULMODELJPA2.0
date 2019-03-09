@@ -8,6 +8,9 @@ package br.edu.ifsul.modelo;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -21,8 +24,14 @@ public class Pais implements Serializable{
     @GeneratedValue(generator = "seq_pais", strategy = GenerationType.SEQUENCE)
 //    @Column(name="id", nullable = false, columnDefinition = "serial")
     private Integer id;
+    @Length(max=50,message = "O nome deve conter menos de {max} caracteres.")
+    @NotBlank(message = "Informe o nome.")
+    @NotNull(message = "Nome não pode ser nulo.")
     @Column(name="nome", nullable = false, length = 50)
     private String nome;
+    @Length(max=3,message = "O ISO deve conter menos de {max} caracteres.")
+    @NotBlank(message = "Informe o ISO.")
+    @NotNull(message = "ISO não pode ser nulo.")
     @Column(name="iso", length = 3, nullable = false)
     private String iso;
 
